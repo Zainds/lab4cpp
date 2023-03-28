@@ -10,9 +10,7 @@ class MyTime
         int secondTime;
 
     public:
-        MyTime() {
-            
-        };
+        MyTime() {};
         MyTime(int h, int m, int s) {
             
             hourTime = h;
@@ -87,9 +85,9 @@ class MyTime
 };
 int main()
 {
+    setlocale(LC_ALL, "");
+    MyTime T(22, 59, 50);
     
-    MyTime T(23, 59, 50);
-    
     T.PrintTime();
     T.Add5Seconds();
     T.PrintTime();
@@ -97,6 +95,6 @@ int main()
     T.PrintTime();
     T.Add5Seconds();
     T.PrintTime();
-    cout << T.GetAllInSeconds();
+    cout << T.GetAllInSeconds() << " секунд";
 }
 
