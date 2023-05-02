@@ -15,6 +15,7 @@ class MyTime
 
     public:
         class IncorrectTimeException {
+            
         };
         MyTime() {};
         MyTime(int h, int m, int s) {
@@ -118,14 +119,13 @@ vector<MyTime> diskIn() {
     vector<MyTime> arr;
     int arrPos = 0;
     ifstream fin("input.txt");
-    if (!fin)
-    {
-        cout <<"Файл не открыт\n\n";
-
-    }
-    else
-    { 
-        cout <<"Все ОК! Файл открыт!\n\n";
+    
+   
+    try{ 
+        if (!fin.is_open())
+        {
+            throw string{ "Файл не открыт \n" };
+        }
         
         for (string line; getline(fin, line); )
         {
@@ -160,6 +160,10 @@ vector<MyTime> diskIn() {
 
         }   
     }
+    catch (string& error_message) {
+        cout << "Exception opening/reading file: "<<error_message;
+    }
+
     return arr;
 }
 void diskOut(vector<MyTime> array) {
