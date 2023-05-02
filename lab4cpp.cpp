@@ -4,8 +4,6 @@
 #include <vector>
 using namespace std;
 
-
-
 class MyTime
 {   
     private:
@@ -14,17 +12,23 @@ class MyTime
         int secondTime;
 
     public:
-        class IncorrectTimeException {
-            
-        };
+        
         MyTime() {};
         MyTime(int h, int m, int s) {
-            if (s < 0 || s > 59 || m < 0 || m > 59 || h < 0 || h > 23) {
-                throw IncorrectTimeException();
+            try {
+				if (s < 0 || s > 59 || m < 0 || m > 59 || h < 0 || h > 23) {
+                    throw string{ "IncorrectTimeException" };
+				}
+
+				hourTime = h;
+				minuteTime = m;
+				secondTime = s;
             }
-            hourTime = h;
-            minuteTime = m;
-            secondTime = s;
+            
+            catch (string& ex) {
+                cout << ex;
+                exit(EXIT_FAILURE);
+            }
         }
         
         int GetAllInSeconds(){
@@ -183,27 +187,12 @@ void diskOut(vector<MyTime> array) {
 int main()
 {
     setlocale(LC_ALL, "");
-   /* MyTime T(22, 59, 05);
-    
-    T.PrintTime();
-    T.Add5Seconds();
-    T.PrintTime();
-    T.Add5Seconds();
-    T.PrintTime();
-    T.Add5Seconds();
-    T.PrintTime();
-    cout << T.GetAllInSeconds() << " секунд";*/
-    
-    
+
     vector<MyTime> a = diskIn();
     for (MyTime T : a) {
         T.PrintTime();
     }
     diskOut(a);
-    
-    
-    //commit test
-    
-    
+ 
 }
 
